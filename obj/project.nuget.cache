@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "wBn9HJdD0zoNaAryazWiXtLQ3eSrdZOGOImfels48ffZsNAKPS45z0LNGcuukY5sL+5ePha11Y1sqt1Fq8fsnA==",
+  "success": true,
+  "projectFilePath": "D:\\Project\\VSCode\\LMS Moodle\\virgollanding\\virgollanding.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\saleh\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\saleh\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\saleh\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\saleh\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\saleh\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\saleh\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
