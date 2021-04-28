@@ -1,0 +1,45 @@
+version: "3.5"
+services:
+  virgol:
+    image: goldenstarc/virgollanding:latest
+    restart: always
+    container_name: virgol_landing
+    # build:
+    #   context: .
+    environment:
+      - ASPNETCORE_URLS=http://+ # ;https://+
+      - ASPNETCORE_ENVIRONMENT=Production
+      - NODE_ENV=production
+      - VIRGOL_SERVER_ROOT_URL=https://panel.vir-gol.ir
+      - VIRGOL_DATABASE_HOST=postgres.vir-gol.ir
+      - VIRGOL_DATABASE_PORT=5432
+      - VIRGOL_DATABASE_NAME=LMS
+      - VIRGOL_DATABASE_USER=postgres
+      - VIRGOL_DATABASE_PASSWORD=PostgreSQLpass.24
+      - VIRGOL_FARAZAPI_URL=http://rest.ippanel.com
+      - VIRGOL_FARAZAPI_SENDER_NUMBER=+98500010707
+      - VIRGOL_FARAZAPI_USERNAME=goldenstarc
+      - VIRGOL_FARAZAPI_PASSWORD=hektug-fakbAm-0vypje
+      - VIRGOL_FARAZAPI_API_KEY=qcP4IQp3PPRV3ppvkG9ScHJcwvUPL3iOJrV9n7QiqDA=
+      - VIRGOL_JWT_SECRET=Saleh Secret Key
+      - VIRGOL_TZ=Asia/Tehran
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.virgol.rule=Host(`vir-gol.ir`)"
+      - "traefik.http.services.virgol.loadbalancer.server.port=80"
+      - "traefik.http.routers.virgol.entrypoints=secure"
+      - "traefik.http.routers.virgol.tls.certresolver=letsencrypt"
+      - "traefik.docker.network=web"
+      - "traefik.http.middlewares.virgol_compress.compress=true"
+      - "traefik.http.routers.virgol.middlewares=virgol_compress"
+    networks:
+      - virgol
+      - web
+    depends_on:
+      - postgres
+      - openldap
+networks:
+  virgol:
+    internal: true
+  web:
+    external: true
