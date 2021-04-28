@@ -4,7 +4,7 @@
 # BUILD_VERSION?=
 # BUILD_IMAGE=0
 IMAGE_ACCOUNT=${2:-goldenstarc}
-IMAGE_REPO=${3:-virgolLanding}
+IMAGE_REPO=${3:-virgollanding}
 IMAGE_TAG=${1:-latest}
 TAG_REVISION=0
 
