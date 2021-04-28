@@ -26,5 +26,5 @@ COPY --from=build /app/published ./
 
 EXPOSE 80 443
 
-ENTRYPOINT ["./virgollanding.School"]
+ENTRYPOINT ["./virgollanding"]
 # ENTRYPOINT ["tail", "-f", "/dev/null"]
