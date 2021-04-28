@@ -20,4 +20,4 @@ sudo docker build -t $IMAGE_ACCOUNT/$IMAGE_REPO:$IMAGE_TAG -t $IMAGE_ACCOUNT/$IM
 sudo docker push $IMAGE_ACCOUNT/$IMAGE_REPO
 sudo docker push $IMAGE_ACCOUNT/$IMAGE_REPO:$IMAGE_TAG
 
-echo -e "\ncd ~/docker/virgol/ && docker-compose pull && docker-compose up -d\n"
+echo -e "\ncd ~/docker/virgol-landing/ && docker-compose pull && docker-compose up -d\n"
