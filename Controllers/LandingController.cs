@@ -29,11 +29,11 @@ namespace virgollanding.Controllers
             appDbContext = dbContext;
         }
 
-        public async Task<IActionResult> SendSMSCode(string Mellicode , string PhoneNumber)
+        public async Task<IActionResult> SendSMSCode(string PhoneNumber)
         {
             try
             {
-                List<VerificationCodeModel> verificationCode = appDbContext.VerificationCodes.Where(x => x.melliCode == Mellicode).ToList();
+                List<VerificationCodeModel> verificationCode = appDbContext.VerificationCodes.Where(x => x.phoneNumber == PhoneNumber).ToList();
                 List<VerificationCodeModel> verifLimit = new List<VerificationCodeModel>();
 
                 foreach (var verifCode in verificationCode)
@@ -46,6 +46,18 @@ namespace virgollanding.Controllers
                 if(verifLimit.Count > 3)
                     return BadRequest("شما حداکثر تعداد درخواست خودرا ثبت نموده اید لطفا منتظر بمانید");
 
+                VerificationCodeModel verification = new VerificationCodeModel();
+                verification.IPAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
+
+                List<VerificationCodeModel> FormIPCheck = appDbContext.VerificationCodes.Where(x => x.IPAddress == verification.IPAddress && x.LastSend >= DateTime.Now.AddHours(-4)).OrderByDescending(x => x.LastSend).ToList();
+                
+                if(FormIPCheck.Count > 0)
+                {
+                    if((DateTime.Now - FormIPCheck.FirstOrDefault().LastSend).TotalHours <= 4 && FormIPCheck.Count >= 16)
+                        return BadRequest("این IP حداکثر تعداد درخواست مجاز خود را ثبت کرده است");
+                }
+
+
                 string verifycode = RandomPassword.GenerateGUID(true , true , true);
 
                 string message = string.Format("کد تایید درخواست پنل  شما از سامانه ویرگول عبارت است از :\n {0}" , verifycode);
@@ -54,9 +66,9 @@ namespace virgollanding.Controllers
                 bool result = smsApi.SendSms(new string[]{PhoneNumber} , message);
                 if(result)
                 {
-                    VerificationCodeModel verification = new VerificationCodeModel();
+                   
                     verification.LastSend = DateTime.Now;
-                    verification.melliCode = Mellicode;
+                    verification.phoneNumber = PhoneNumber;
                     verification.VerificationCode = verifycode;
 
                     appDbContext.VerificationCodes.Add(verification);
@@ -65,7 +77,7 @@ namespace virgollanding.Controllers
                 }
 
                 return BadRequest("در ارسال پیامک مشکلی بوجود آمد");
-                
+
             }
             catch (Exception ex)
             {
@@ -94,12 +106,12 @@ namespace virgollanding.Controllers
                 if(string.IsNullOrEmpty(reqForm.FirstName) || string.IsNullOrEmpty(reqForm.LastName))
                     return BadRequest("اطلاعات به درستي تكميل نشده است");
 
-                ReqForm oldReqForm = appDbContext.ReqForms.Where(x => x.Mellicode == reqForm.Mellicode).FirstOrDefault();
+                ReqForm oldReqForm = appDbContext.ReqForms.Where(x => x.PhoneNumber == reqForm.PhoneNumber).FirstOrDefault();
                 if(oldReqForm != null && oldReqForm.Status != ReqStatus.Closed)
                     return BadRequest("درخواست قبلی شما درحال پردازش میباشد");
 
                 DateTime now = DateTime.Now;
-                List<VerificationCodeModel> verificationCode = appDbContext.VerificationCodes.Where(x => x.melliCode == reqForm.Mellicode).OrderByDescending(x => x.LastSend).ToList();
+                List<VerificationCodeModel> verificationCode = appDbContext.VerificationCodes.Where(x => x.phoneNumber == reqForm.PhoneNumber).OrderByDescending(x => x.LastSend).ToList();
 
                 VerificationCodeModel result = new VerificationCodeModel();
                 foreach (var verifCode in verificationCode)
@@ -117,7 +129,7 @@ namespace virgollanding.Controllers
                 await appDbContext.SaveChangesAsync();
 
                 string message = string.Format("درخواست ثبت مدرسه جديد ثبت شد.\nاطلاعات درخواست : \n" + 
-                                                "{0} {1}\n كد ملي : {2}  \n شماره تماس : {3}" , reqForm.FirstName , reqForm.LastName , reqForm.Mellicode , reqForm.PhoneNumber);
+                                                "{0} {1}\n كد ملي : {2}  \n شماره تماس : {3}" , reqForm.FirstName , reqForm.LastName , (string.IsNullOrEmpty(reqForm.Mellicode) ? "ندارد" : reqForm.Mellicode) , reqForm.PhoneNumber);
 
                 message = message.Replace("\n" , Environment.NewLine);
                 string adminPhone = AppSettings.GetValueFromDatabase(appDbContext , "Admin_Phone");

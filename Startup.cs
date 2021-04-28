@@ -162,14 +162,10 @@ namespace virgollanding
 
             app.UseHttpsRedirection();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseRouting();
-            
-            // app.UseForwardedHeaders(new ForwardedHeadersOptions
-            // {
-            //     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            // });
-
-
+        
             app.UseAuthentication();
             app.UseAuthorization();
             

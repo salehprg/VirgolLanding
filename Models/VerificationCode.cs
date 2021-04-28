@@ -10,7 +10,8 @@ namespace virgollanding.Models
         public int Id {get; set;}
         public int ReqFormId {get; set;}
         public string VerificationCode {get; set;}
-        public string melliCode {get; set;}
+        public string phoneNumber {get; set;}
+        public string IPAddress {get; set;}
         public DateTime LastSend {get; set;}
     }
 }

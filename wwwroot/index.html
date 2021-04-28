@@ -319,9 +319,12 @@
                         <div class="subscribe-form mt-50">
                             <p class="error-demo d-none">خطایی رخ داد. لطفا دوباره امتحان کنید</p>
                             <form action="#">
-                                <input name="fname" class="text-right mb-2" type="text" placeholder="نام" required>
+                                <input name="fname" class="text-right mb-2" type="text" placeholder="نام" style="width: 40%;" required>
+                                <input name="lname" class="text-right mb-2" type="text" placeholder=" نام خانوادگی" style="width: 59%;" required>
                                 <input name="phone" class="text-left" type="text" placeholder="شماره همراه" required>
-                                <button id="demo-btn" class="main-btn">ارسال</button>
+                                <input id="verifyInput" name="verifCode" class="text-left d-none" type="text" placeholder="کد تایید پیامک شده را وارد کنید">
+                                <input id="reqType" name="reqType" type="hidden" value="sendCode">
+                                <button id="demo-btn" class="main-btn" type="submit">ارسال</button>
                             </form>
                         </div>
                     </div>

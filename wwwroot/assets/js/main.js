@@ -54,22 +54,60 @@ $(function () {
             $(".error-demo").addClass("d-none");
             $(".error-demo").removeClass("d-block");
             const data = $("form").serializeArray();
-            const fname = data.find(d => d.name === 'fname');
             const phone = data.find(d => d.name === 'phone');
             
-            axios.get('https://jsonplaceholder.typicode.com/todos/1000')
-            .then(function(response) {
-                $(".subscribe-form").html(`
-                    <h4 class="mb-2">درخواست شما برای دریافت دموی رایگان ثبت شد</h4>
-                    <p>کارشناسان ویرگول در اسرع وقت با شما تماس خواهند گرفت</p>
-                `);
-            }).catch(function(err) {
-                $("#demo-btn").html('ارسال');
-                $(".error-demo").addClass("d-block");
-                $(".error-demo").removeClass("d-none");
-            }).finally(function() {
-                loading = false;
-            });
+            const reqType = data.find(d => d.name === 'reqType').value;
+            const verifCode = data.find(d => d.name === 'verifCode').value;
+            
+            console.log(reqType)
+            if(reqType == 'sendCode')
+            {
+                axios.get('/api/Landing/SendSMSCode?PhoneNumber=' + phone.value)
+                .then(function(response) {
+                    $("#verifyInput").addClass(" mt-2");
+                    $("#verifyInput").removeClass("d-none");
+                    $("#demo-btn").html('ارسال');
+
+                    $("#reqType").val('verifyCode');
+                }).catch(function(err) {
+                    $("#demo-btn").html('ارسال');
+                    $(".error-demo").addClass("d-block");
+                    $(".error-demo").removeClass("d-none");
+                }).finally(function() {
+                    loading = false;
+                });
+            }
+            else if(reqType == 'verifyCode')
+            {
+                const fname = data.find(d => d.name === 'fname');
+                const lname = data.find(d => d.name === 'lname');
+
+                let  bodyFormData = JSON.stringify({
+                    FirstName : fname.value ,
+                    LastName : lname.value ,
+                    PhoneNumber : phone.value})
+
+                axios.post('/api/Landing/PanelRequest?VerifyCode=' + verifCode , 
+                            bodyFormData , 
+                            {
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }}
+                            )
+                .then(function(response) {
+                    $(".subscribe-form").html(`
+                        <h4 class="mb-2">درخواست شما برای دریافت دموی رایگان ثبت شد</h4>
+                        <p>کارشناسان ویرگول در اسرع وقت با شما تماس خواهند گرفت</p>
+                    `);
+                }).catch(err => {
+                    $("#demo-btn").html('ارسال');
+                    $(".error-demo").addClass("d-block");
+                    $(".error-demo").removeClass("d-none");
+                    $(".error-demo").html(err.response.data);
+                }).finally(function() {
+                    loading = false;
+                });
+            }
         }
     });
 
