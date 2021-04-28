@@ -17,7 +17,7 @@ sudo git pull origin master
 sudo docker login
 sudo docker build -t $IMAGE_ACCOUNT/$IMAGE_REPO:$IMAGE_TAG -t $IMAGE_ACCOUNT/$IMAGE_REPO:latest --force-rm .
 
-sudo docker push $IMAGE_ACCOUNT/$IMAGE_REPO
+sudo docker push $IMAGE_ACCOUNT/$IMAGE_REPO:latest
 sudo docker push $IMAGE_ACCOUNT/$IMAGE_REPO:$IMAGE_TAG
 
 echo -e "\ncd ~/docker/virgol-landing/ && docker-compose pull && docker-compose up -d\n"
