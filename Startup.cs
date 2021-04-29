@@ -54,11 +54,7 @@ namespace virgollanding
 
             if(!environment.IsDevelopment())
             {
-                // IConfigurationSection section = Configuration.GetSection("AppSettings");
-
-                // section.Get<AppSettings>();
                 
-                // conStr = Configuration.GetConnectionString("PublishConnection_PS");
                 string host = Environment.GetEnvironmentVariable("VIRGOL_DATABASE_HOST");
                 string port = Environment.GetEnvironmentVariable("VIRGOL_DATABASE_PORT");
                 string name = Environment.GetEnvironmentVariable("VIRGOL_DATABASE_NAME");
@@ -67,6 +63,7 @@ namespace virgollanding
 
                 conStr = string.Format("Server={0};Port={1};Database={2};Username={3};Password={4}" , host ,port ,  name , userName ,password);
                 
+                Console.WriteLine(conStr);
                 AppSettings.FarazAPI_URL = Environment.GetEnvironmentVariable("VIRGOL_FARAZAPI_URL");
                 AppSettings.FarazAPI_SendNumber = Environment.GetEnvironmentVariable("VIRGOL_FARAZAPI_SENDER_NUMBER");
                 AppSettings.FarazAPI_Username = Environment.GetEnvironmentVariable("VIRGOL_FARAZAPI_USERNAME");
@@ -87,7 +84,6 @@ namespace virgollanding
                 conStr = Configuration.GetConnectionString("ConnectionSTR");
             }
            
-
             AppSettings appSettings = new AppSettings();
 
             Console.WriteLine(appSettings.ToString());

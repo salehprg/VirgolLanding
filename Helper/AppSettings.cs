@@ -43,7 +43,9 @@ namespace virgollanding.Helper
 
         public override string ToString()
         {
-            return string.Format("{0}\n" , JWTSecret);
+            return string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n{9}" ,
+                                     JWTSecret , smtpHost , smtpPassword , smtpPort , smtpUsername , FarazAPI_ApiKey ,
+                                     FarazAPI_Password , FarazAPI_SendNumber , FarazAPI_URL , FarazAPI_Username);
         }
 
 
