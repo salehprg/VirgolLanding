@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/microsoft-dotnet-core
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY ./ ./virgollanding
 
@@ -16,7 +16,7 @@ RUN dotnet build --no-restore -c Release
 RUN dotnet publish -c Release -o /app/published --self-contained false
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 
 # RUN apt update -yq \
 #     && apt install nano -yq
