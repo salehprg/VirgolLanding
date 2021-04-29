@@ -15,6 +15,8 @@ using virgollanding.Helper;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using virgollanding.FarazSms;
+using virgollanding.Models.FarazSms;
+using virgollanding.Models;
 
 namespace virgollanding.Helper
 {
@@ -60,86 +62,60 @@ namespace virgollanding.Helper
             return result;
 		
         }
-        public bool SendVerifySms(string Number , string userName , string code)
+        public bool SendVerifySms(string Number , string code)
         {
-            ForgotPassword forgotPassword = new ForgotPassword();
-            forgotPassword.verificationCode = code;
-            forgotPassword.userName = userName;
+            VerifyCodeModel verifyCodeModel = new VerifyCodeModel();
+            verifyCodeModel.verifyCode = code;
 
-            SendPatternModel<ForgotPassword> patternModel = new SendPatternModel<ForgotPassword>();
+            SendPatternModel<VerifyCodeModel> patternModel = new SendPatternModel<VerifyCodeModel>();
 
-            patternModel.pattern_code = "5qhnalxjc0";
+            patternModel.pattern_code = "38x9cgatmn";
             patternModel.originator = FromNumber;
             patternModel.recipient = Number;
-            patternModel.values = forgotPassword;
+            patternModel.values = verifyCodeModel;
 
             string json = JsonConvert.SerializeObject(patternModel);
-
-            // string postData = "op=send&uname=" + Username + "&pass=" + Password + "&message=" + Message +"&to="+json+"&from=+98" + FromNumber;
 
             return SendData(json , "/v1/messages/patterns/send");
             
         }
-
-        public bool SendSchoolData(string Number , string schoolName , string userName , string password)
+        public bool SendCustomerInfo(string Number , ReqForm reqForm)
         {
-            SchoolDataSMS schoolDataSMS = new SchoolDataSMS();
-            schoolDataSMS.schoolName = schoolName;
-            schoolDataSMS.userName = userName;
-            schoolDataSMS.password = password;
+            CustomerInfoModel customerInfoModel = new CustomerInfoModel();
+            customerInfoModel.firstName = reqForm.FirstName;
+            customerInfoModel.lastName = reqForm.LastName;
+            customerInfoModel.phoneNumber = reqForm.PhoneNumber;
+            customerInfoModel.melliCode = reqForm.Mellicode;
 
-            SendPatternModel<SchoolDataSMS> patternModel = new SendPatternModel<SchoolDataSMS>();
+            SendPatternModel<CustomerInfoModel> patternModel = new SendPatternModel<CustomerInfoModel>();
 
-            patternModel.pattern_code = "9zgw29uffx";
+            patternModel.pattern_code = "vxhpazlnda";
             patternModel.originator = FromNumber;
             patternModel.recipient = Number;
-            patternModel.values = schoolDataSMS;
+            patternModel.values = customerInfoModel;
 
             string json = JsonConvert.SerializeObject(patternModel);
-
+            
             return SendData(json , "/v1/messages/patterns/send");
-
-            //return true;
+            
         }
 
-        public bool SendScheduleNotify(string Number , string userName , string className , string dateTime)
+        public bool SendReqIdSms(string Number , string reqId)
         {
-            NotifySMSModel notifySMSModel = new NotifySMSModel();
-            notifySMSModel.userName = userName;
-            notifySMSModel.className = className;
-            notifySMSModel.dateTime = dateTime;
+            ReqFormIdModel reqForm = new ReqFormIdModel();
+            reqForm.reqId = reqId;
 
-            SendPatternModel<NotifySMSModel> patternModel = new SendPatternModel<NotifySMSModel>();
+            SendPatternModel<ReqFormIdModel> patternModel = new SendPatternModel<ReqFormIdModel>();
 
-            patternModel.pattern_code = "cwf9r8lirp";
+            patternModel.pattern_code = "txul94s24e";
             patternModel.originator = FromNumber;
             patternModel.recipient = Number;
-            patternModel.values = notifySMSModel;
+            patternModel.values = reqForm;
 
             string json = JsonConvert.SerializeObject(patternModel);
-
-            //return SendData(json , "/v1/messages/patterns/send");
-            return true;
-        }
-
-        public bool SendErrorCollecotr(string Numbers , string serviceError , string singularPlural)
-        {
-            ErrorCollectorModel errorCollector = new ErrorCollectorModel();
-            errorCollector.serviceName = serviceError;
-            errorCollector.singularPlural = singularPlural;
-
-            SendPatternModel<ErrorCollectorModel> patternModel = new SendPatternModel<ErrorCollectorModel>();
-
-            patternModel.pattern_code = "8sa6tt73ni";
-            patternModel.originator = FromNumber;
-            patternModel.recipient = Numbers;
-            patternModel.values = errorCollector;
-
-            string json = JsonConvert.SerializeObject(patternModel);
-
-            // string postData = "op=send&uname=" + Username + "&pass=" + Password + "&message=" + Message +"&to="+json+"&from=+98" + FromNumber;
-
+            
             return SendData(json , "/v1/messages/patterns/send");
+            
         }
 
         public bool SendSms(string[] Numbers , string Message)
@@ -156,38 +132,6 @@ namespace virgollanding.Helper
 
             return SendData(json , "/v1/messages");
         }
-
-
-        // public string SendSocial(string[] Numbers , string Message , SocialType _social)
-        // {
-        //     string json = JsonConvert.SerializeObject(Numbers);
-
-        //     string SocialName = "";
-
-        //     switch(_social)
-        //     {
-        //         case SocialType.Telegram:
-        //             SocialName = "telegram";
-        //             break;
-
-        //         case SocialType.Viber :
-        //             SocialName = "Viber";
-        //             break;
-        //     }
-
-        //     string postData = "op=sendsocial&uname" + Username + "&pass=" + Password + "&message=" + Message +"&to="+json+"&from=+98" + FromNumber + "&type=" + SocialName;
-
-        //     return SendData(postData);
-        // }
-        
-        // public string GetCredit(string[] Numbers , string Message)
-        // {
-        //     string json = JsonConvert.SerializeObject(Numbers);
-
-        //     string postData = "op=credit&uname" + Username + "&pass=" + Password;
-
-        //     return SendData(postData , true);
-        // }
-        
+  
     }
 }

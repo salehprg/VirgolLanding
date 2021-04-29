@@ -60,19 +60,16 @@ namespace virgollanding.Controllers
 
                 string verifycode = RandomPassword.GeneratePassword(false , false , true , 6);
 
-                string message = string.Format("کد تایید درخواست پنل  شما از سامانه ویرگول عبارت است از :\n {0}" , verifycode);
-
-                message = message.Replace("\n" , Environment.NewLine);
-                bool result = smsApi.SendSms(new string[]{PhoneNumber} , message);
+                bool result = smsApi.SendVerifySms(PhoneNumber , verifycode);
                 if(result)
                 {
-                   
                     verification.LastSend = DateTime.Now;
                     verification.phoneNumber = PhoneNumber;
                     verification.VerificationCode = verifycode;
 
                     appDbContext.VerificationCodes.Add(verification);
                     await appDbContext.SaveChangesAsync();
+                    
                     return Ok("پیامک با موفقیت ارسال شد");
                 }
 
@@ -128,20 +125,22 @@ namespace virgollanding.Controllers
                 await appDbContext.ReqForms.AddAsync(reqForm);
                 await appDbContext.SaveChangesAsync();
 
-                string message = string.Format("درخواست ثبت مدرسه جديد ثبت شد.\nاطلاعات درخواست : \n" + 
-                                                "{0} {1}\n كد ملي : {2}  \n شماره تماس : {3}" , reqForm.FirstName , reqForm.LastName , (string.IsNullOrEmpty(reqForm.Mellicode) ? "ندارد" : reqForm.Mellicode) , reqForm.PhoneNumber);
-
-                message = message.Replace("\n" , Environment.NewLine);
                 string adminPhone = AppSettings.GetValueFromDatabase(appDbContext , "Admin_Phone");
 
-                smsApi.SendSms(new string[]{adminPhone} , message);
 
-                if(reqForm.email != null)
+                smsApi.SendCustomerInfo(adminPhone , reqForm);
+
+
+                string supportEmail = AppSettings.GetValueFromDatabase(appDbContext , "SupportEmail");
+                if(supportEmail != null)
                 {
-                    MailHelper mailHelper = new MailHelper(AppSettings.GetValueFromDatabase(appDbContext , "SupportEmail"));
-                    string emailMessage = string.Format(" {0} {1} درخواست شما براي پنل مدرسه با موفقیت ثبت شد  \n کد پیگیری : {2}" , reqForm.FirstName , reqForm.LastName , reqForm.Id);
-                    emailMessage = emailMessage.Replace("\n" , Environment.NewLine);
-                    mailHelper.Send(reqForm.email , "درخواست پنل مدرسه - سامانه ویرگول -" , emailMessage , MimeKit.Text.TextFormat.Text);
+                    MailHelper mailHelper = new MailHelper(supportEmail);
+                    string message = string.Format("درخواست ثبت مدرسه جديد ثبت شد.\nاطلاعات درخواست : \n" + 
+                                                "{0} {1}\n كد ملي : {2}  \n شماره تماس : {3}" , reqForm.FirstName , reqForm.LastName , (string.IsNullOrEmpty(reqForm.Mellicode) ? "ندارد" : reqForm.Mellicode) , reqForm.PhoneNumber);
+
+                    message = message.Replace("\n" , Environment.NewLine);
+
+                    mailHelper.Send(supportEmail , "درخواست پنل مدرسه - سامانه ویرگول -" , message , MimeKit.Text.TextFormat.Text);
                 }
 
 

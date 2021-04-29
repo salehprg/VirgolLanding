@@ -21,6 +21,9 @@ services:
       - VIRGOL_FARAZAPI_USERNAME=goldenstarc
       - VIRGOL_FARAZAPI_PASSWORD=hektug-fakbAm-0vypje
       - VIRGOL_FARAZAPI_API_KEY=qcP4IQp3PPRV3ppvkG9ScHJcwvUPL3iOJrV9n7QiqDA=
+      - VIRGOL_SMTP_HOST=mail.vir-gol.ir
+      - VIRGOL_SMTP_PASS=Mailpass.2476
+      - VIRGOL_SMTP_PORT=25
       - VIRGOL_JWT_SECRET=Saleh Secret Key
     labels:
     - "traefik.enable=true"
