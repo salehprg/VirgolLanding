@@ -59,7 +59,7 @@ namespace virgollanding
                 // section.Get<AppSettings>();
                 
                 // conStr = Configuration.GetConnectionString("PublishConnection_PS");
-
+AppSettings.JWTSecret = Environment.GetEnvironmentVariable("VIRGOL_JWT_SECRET");
                 string host = Environment.GetEnvironmentVariable("VIRGOL_DATABASE_HOST");
                 string port = Environment.GetEnvironmentVariable("VIRGOL_DATABASE_PORT");
                 string name = Environment.GetEnvironmentVariable("VIRGOL_DATABASE_NAME");
