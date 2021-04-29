@@ -58,7 +58,7 @@ namespace virgollanding.Controllers
                 }
 
 
-                string verifycode = RandomPassword.GenerateGUID(true , true , true);
+                string verifycode = RandomPassword.GeneratePassword(false , false , true , 6);
 
                 string message = string.Format("کد تایید درخواست پنل  شما از سامانه ویرگول عبارت است از :\n {0}" , verifycode);
 
