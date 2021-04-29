@@ -59,7 +59,6 @@ namespace virgollanding
                 // section.Get<AppSettings>();
                 
                 // conStr = Configuration.GetConnectionString("PublishConnection_PS");
-AppSettings.JWTSecret = Environment.GetEnvironmentVariable("VIRGOL_JWT_SECRET");
                 string host = Environment.GetEnvironmentVariable("VIRGOL_DATABASE_HOST");
                 string port = Environment.GetEnvironmentVariable("VIRGOL_DATABASE_PORT");
                 string name = Environment.GetEnvironmentVariable("VIRGOL_DATABASE_NAME");
@@ -78,7 +77,7 @@ AppSettings.JWTSecret = Environment.GetEnvironmentVariable("VIRGOL_JWT_SECRET");
                 AppSettings.smtpPassword = Environment.GetEnvironmentVariable("VIRGOL_SMTP_PASS");
                 AppSettings.smtpPort = Environment.GetEnvironmentVariable("VIRGOL_SMTP_PORT");
 
-
+                AppSettings.JWTSecret = Environment.GetEnvironmentVariable("VIRGOL_JWT_SECRET");
             }
             else
             {

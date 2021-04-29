@@ -22,7 +22,6 @@ services:
       - VIRGOL_FARAZAPI_PASSWORD=hektug-fakbAm-0vypje
       - VIRGOL_FARAZAPI_API_KEY=qcP4IQp3PPRV3ppvkG9ScHJcwvUPL3iOJrV9n7QiqDA=
       - VIRGOL_JWT_SECRET=Saleh Secret Key
-      - VIRGOL_TZ=Asia/Tehran
     labels:
     - "traefik.enable=true"
     - "traefik.http.routers.virgolLand.rule=Host(`vir-gol.ir`)"
