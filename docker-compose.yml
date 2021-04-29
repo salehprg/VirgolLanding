@@ -33,4 +33,6 @@ services:
  #     - "traefik.http.routers.virgol.middlewares=virgol_compress"
     networks:
       - web
-      - virgol
+networks:
+  web:
+    external: true
