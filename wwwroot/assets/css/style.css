@@ -556,6 +556,16 @@ p {
   .sticky .navbar {
     padding: 10px 0; }
 
+.phone {
+  color: #fff;
+  margin-right: 15px;
+}
+
+@media (max-width: 567px) {
+  .phone {
+    margin-right: 0;
+  } }
+
 .navbar {
   padding: 25px 0;
   border-radius: 5px;
@@ -788,6 +798,9 @@ p {
   background-color: #2E2E2E; }
 
 .sticky .navbar-nav .nav-item a {
+  color: #2E2E2E; }
+
+.sticky .phone {
   color: #2E2E2E; }
 
 .sticky .navbar-nav .nav-item.active > a, .sticky .navbar-nav .nav-item:hover > a {
