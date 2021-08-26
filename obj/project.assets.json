@@ -6538,30 +6538,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\saleh\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\sedja\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\Project\\VSCode\\LMS Moodle\\virgollanding\\virgollanding.csproj",
+      "projectUniqueName": "D:\\Projects\\virgollanding\\virgollanding.csproj",
       "projectName": "virgollanding",
-      "projectPath": "d:\\Project\\VSCode\\LMS Moodle\\virgollanding\\virgollanding.csproj",
-      "packagesPath": "C:\\Users\\saleh\\.nuget\\packages\\",
-      "outputPath": "d:\\Project\\VSCode\\LMS Moodle\\virgollanding\\obj\\",
+      "projectPath": "D:\\Projects\\virgollanding\\virgollanding.csproj",
+      "packagesPath": "C:\\Users\\sedja\\.nuget\\packages\\",
+      "outputPath": "D:\\Projects\\virgollanding\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\saleh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\sedja\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6635,6 +6629,16 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.10, 3.1.10]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.17, 3.1.17]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -6643,7 +6647,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
