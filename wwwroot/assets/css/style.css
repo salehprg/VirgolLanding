@@ -114,7 +114,7 @@ ul, ol {
 p {
   font-size: 16px;
   font-weight: 400;
-  line-height: 26px;
+  line-height: 35px;
   color: #6A6972;
   margin: 0px; }
 
@@ -585,6 +585,24 @@ p {
 .navbar-brand {
   padding: 0; }
 
+@media only screen and (min-width: 576px) and (max-width: 991px) {
+  .navbar img {
+    position: absolute;
+    top: 1rem;
+    right: -1rem;
+  }
+  .phone {
+    display: block;
+    margin-right: 8rem;
+  }
+  .navbar-area.sticky {
+    padding: 1rem 0;
+  }
+  .navbar-area.sticky img{
+    top: 0;
+  }
+}
+
 .navbar-toggler {
   padding: 0; }
   .navbar-toggler .toggler-icon {
@@ -618,6 +636,7 @@ p {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .navbar-collapse {
+    text-align: right;
     position: absolute;
     top: 100%;
     left: 0;
@@ -631,6 +650,7 @@ p {
 
 @media (max-width: 767px) {
   .navbar-collapse {
+    text-align: right;
     position: absolute;
     top: 100%;
     left: 0;
@@ -1381,9 +1401,14 @@ p {
 
 .subscribe-content .subscribe-title {
   font-size: 35px;
-  font-weight: 700; }
+  font-weight: 700;
+  text-align: center;
+  line-height: 3rem;
+}
   @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .subscribe-content .subscribe-title {
+      text-align: center;
+      line-height: 3rem;
       font-size: 30px; } }
   @media (max-width: 767px) {
     .subscribe-content .subscribe-title {
@@ -1401,26 +1426,44 @@ p {
     width: 100%;
     color: #2E2E2E; }
     .subscribe-form input::placeholder {
+      text-align: right;
       opacity: 1;
       color: #B9B9B9; }
     .subscribe-form input::-moz-placeholder {
-      opacity: 1;
-      color: #B9B9B9; }
-    .subscribe-form input::-moz-placeholder {
+      text-align: right;
       opacity: 1;
       color: #B9B9B9; }
     .subscribe-form input::-webkit-input-placeholder {
+      text-align: right;
       opacity: 1;
       color: #B9B9B9; }
+    .subscribe-form input.text-left::placeholder {
+      padding-right: 5rem; }
+    .subscribe-form input.text-left::-moz-placeholder {
+      padding-right: 5rem; }
+    .subscribe-form input.text-left::-webkit-input-placeholder {
+      padding-right: 5rem; }
+    @media (max-width: 767px) {
+      .subscribe-form input::placeholder {
+        text-align: center; }
+      .subscribe-form input::-moz-placeholder {
+        text-align: center; }
+      .subscribe-form input::-webkit-input-placeholder {
+        text-align: center; }
+      .subscribe-form input.text-left::placeholder {
+        padding-right: 0; }
+      .subscribe-form input.text-left::-moz-placeholder {
+        padding-right: 0; }
+      .subscribe-form input.text-left::-webkit-input-placeholder {
+        padding-right: 0; }
+    }
     .subscribe-form input:focus {
       border-color: #7033FF; }
   .subscribe-form button {
     position: absolute;
     bottom: 0;
     right: 0;
-    border-radius: 0;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 0 5px 5px 0;
     height: 65px;
     line-height: 65px;
     background: -webkit-linear-gradient(left, #fe8464 0%, #fe6e9a 50%, #fe8464 100%);
@@ -1438,17 +1481,17 @@ p {
         position: absolute;
         width: auto;
         margin-top: 0;
-        border-radius: 0;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px; } }
+        border-radius: 0 5px 5px 0;
+      }
+    }
     .subscribe-form button:hover {
       color: #fff;
       background-position: right center; }
 
-
 .error-demo {
   color: #fe6e9a;
 }
+
 /*===========================
        11.FOOTER  css 
 ===========================*/
@@ -1484,7 +1527,7 @@ p {
   padding-top: 50px; }
 
 .footer-about .logo img {
-  width: 160px; }
+  width: 40%; }
 
 .footer-about .text {
   color: #fff;
@@ -1507,11 +1550,12 @@ p {
       .footer-about .social li a:hover {
         color: #FE8464; }
 
+
 .footer-title .title {
+  text-align: right;
   font-size: 24px;
   font-weight: 700;
-  color: #fff; 
-
+  color: #fff;
 }
 
 @media (max-width: 767px) {
@@ -1524,9 +1568,10 @@ p {
   padding: 0 35px; }
   @media (max-width: 767px) {
     .link-wrapper {
-      padding: 0;
-      padding-left: 50px; } }
+      padding: 0 0 0 50px;
+    } }
   .link-wrapper .link {
+    text-align: right;
     padding-top: 20px; }
     .link-wrapper .link li {
       margin-top: 20px; }
@@ -1541,12 +1586,41 @@ p {
         .link-wrapper .link li a:hover {
           color: #FE8464; }
 
+.footer-contact .title {
+  text-align: center;
+}
 .footer-contact .contact {
+  text-align: center;
   padding-top: 20px; }
   .footer-contact .contact li {
     margin-top: 20px;
     font-size: 16px;
     color: #fff; }
+
+@media (max-width: 576px) {
+  .footer-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .link-wrapper {
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+  .footer-link * {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .footer-title .title{
+    text-align: center;
+  }
+  .footer-link .link {
+    margin: 0;
+    padding: 0;
+  }
+}
 
 .footer-copyright {
   border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -1593,3 +1667,8 @@ p {
   display: none; }
   .back-to-top:hover {
     color: #fff; }
+
+/*===== PHONES =====*/
+.fa-phone {
+  font-size: 1.5rem;
+}
